@@ -1,5 +1,7 @@
 package TrabajoFinal.TorneoBaloncesto;
 
+import java.util.ArrayList;
+
 public class Equipo {
 	
 	private int id;
@@ -8,16 +10,17 @@ public class Equipo {
 	
 	private Categoria categoria;
 	
+	private ArrayList<Jugador> jugadores;
 	
 	public Equipo() {
-		// TODO Auto-generated constructor stub
+		jugadores = new ArrayList<>();
 	}
 
 	public Equipo(int id, String nombre, Categoria categoria) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.categoria = categoria;
+		jugadores = new ArrayList<>();
 	}
 
 	
@@ -45,6 +48,27 @@ public class Equipo {
 		this.categoria = categoria;
 	}
 
+	public void addJugador(Jugador jugador) {
+		jugadores.add(jugador);
+	}
+	
+	public void eraseJugador(int id) {
+		for (Jugador jugador : jugadores) {
+			if(jugador.getId()==id) {
+				jugadores.remove(jugador);
+			}
+		}
+	}
+	
+	public void searchJugador(int id) {
+		for (Jugador jugador : jugadores) {
+			if(jugador.getId()==id) {
+				System.out.println(jugador);
+				
+			}
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "Equipo [id=" + id + ", nombre=" + nombre + ", categoria=" + categoria + "]";

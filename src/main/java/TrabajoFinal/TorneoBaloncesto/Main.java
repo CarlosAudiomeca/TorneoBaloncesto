@@ -1,7 +1,10 @@
 package TrabajoFinal.TorneoBaloncesto;
 
 
-import TrabajoFinal.TorneoBaloncesto.Pista.ubicacion;
+import java.io.ObjectInputStream.GetField;
+import java.time.LocalDate;
+
+
 
 public class Main {
 	
@@ -17,11 +20,14 @@ public class Main {
 		jugador.setNombre("Carlos");
 		jugador.setApellidos("Jimenez Rodrigez");
 		jugador.setEquipo(equipo1);
-		jugador.setCategoria(Categoria.Senior);
+		
+		jugador.setFechaNacimiento(LocalDate.of(2000, 5, 5));
+		
+		System.out.println(jugador);
 		
 		Arbitro arbitro = new Arbitro(1, Categoria.Senior);
 		
-		Pista pista = new Pista(1, "NOSE",ubicacion.Derecha);
+		Pista pista = new Pista(Ubicacion.Derecha);
 		
 		Partido partido = new Partido();
 		partido.setId(1);

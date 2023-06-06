@@ -20,7 +20,7 @@ public class Partido {
 	
 	
 	public Partido() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Partido(int id, Time hora, Pista pista, Equipo equipo1, Equipo equipo2, Arbitro arbitro, String resultado) {

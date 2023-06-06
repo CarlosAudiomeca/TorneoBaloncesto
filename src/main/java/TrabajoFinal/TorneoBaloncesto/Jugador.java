@@ -4,42 +4,35 @@ import java.time.LocalDate;
 
 public class Jugador extends Persona{
 	
-	private int id;
+	
 	
 	private LocalDate fechaNacimiento;
 	
 	private Equipo equipo;
 	
-	private Categoria categoria;
 	
 	
 	public Jugador() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Jugador(int id, LocalDate fechaNacimiento, Equipo equipo, Categoria categoria) {
-		super();
-		this.id = id;
+	
+	public Jugador(int id, String nombre, String apellidos, LocalDate fechaNacimiento, Equipo equipo) {
+		super(id, nombre, apellidos);
+		
 		this.fechaNacimiento = fechaNacimiento;
 		this.equipo = equipo;
-		this.categoria= categoria;
-	}
-	
-	
-	public int getId() {
-		return id;
+		this.categoria = ponerCategoria();
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+		this.categoria=ponerCategoria();
 	}
 
 	public Equipo getEquipo() {
@@ -50,19 +43,32 @@ public class Jugador extends Persona{
 		this.equipo = equipo;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
+	
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+
+	
+	
+	
+
 
 	@Override
 	public String toString() {
-		return "Jugador [id=" + id + ", fechaNacimiento=" + fechaNacimiento + ", equipo=" + equipo + "]";
+		return super.toString()+ " Jugador [fechaNacimiento=" + fechaNacimiento + ", equipo=" + equipo + "]";
+		
+		
 	}
-	
-	
 
+
+	public Categoria ponerCategoria() {
+		if(fechaNacimiento.getYear()<2005) {
+			return categoria.Senior;
+		}else if(fechaNacimiento.getYear()<=2006) {
+			return categoria.Juvenil;
+		}else if(fechaNacimiento.getYear()<=2008) {
+			return categoria.Cadete;
+		}
+		
+		return categoria.Infantil;
+		
+	}
 }

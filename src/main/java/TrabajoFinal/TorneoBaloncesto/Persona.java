@@ -2,22 +2,45 @@ package TrabajoFinal.TorneoBaloncesto;
 
 public class Persona {
 	
-	private String nombre;
+	protected int id;
 	
-	private String apellidos;
+	protected String nombre;
+	
+	protected String apellidos;
+	
+	protected Categoria categoria;
 	
 	
 	public Persona() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Persona(String nombre, String apellidos) {
-		super();
+	
+	//Para jugador
+	public Persona(int id, String nombre, String apellidos) {
+		this.id=id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		
 	}
 
+	//este es para arbitro
+	public Persona(int id, String nombre, String apellidos, Categoria categoria) {
+		this.id=id;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.categoria=categoria;
+	}
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -36,9 +59,21 @@ public class Persona {
 
 	
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Persona [nombre=" + nombre + ", apellidos=" + apellidos + "]";
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", categoria=" + categoria
+				+ "]";
 	}
+
+	
 
 }
