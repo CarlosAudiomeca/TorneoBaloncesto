@@ -1,4 +1,4 @@
-package TrabajoFinal.TorneoBaloncesto;
+package domain.models;
 
 public class Arbitro extends Persona{
 	

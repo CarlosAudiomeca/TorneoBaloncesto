@@ -1,6 +1,7 @@
-package TrabajoFinal.TorneoBaloncesto;
-	enum Ubicacion{Izquierda, Derecha}
+package domain.models;
+	
 public class Pista {
+	public enum Ubicacion{Izquierda, Derecha}
 	
 	private static int contador=0;
 	
