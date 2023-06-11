@@ -61,14 +61,14 @@ public class Jugador extends Persona{
 
 	public Categoria ponerCategoria() {
 		if(fechaNacimiento.getYear()<2005) {
-			return categoria.Senior;
+			return Categoria.Senior;
 		}else if(fechaNacimiento.getYear()<=2006) {
-			return categoria.Juvenil;
+			return Categoria.Juvenil;
 		}else if(fechaNacimiento.getYear()<=2008) {
-			return categoria.Cadete;
+			return Categoria.Cadete;
 		}
 		
-		return categoria.Infantil;
+		return Categoria.Infantil;
 		
 	}
 }

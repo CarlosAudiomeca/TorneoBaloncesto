@@ -17,7 +17,7 @@ public class AddJugadorUseCase {
 	
 	public void execute(Jugador jugador) {
 		try {
-			conexion.insertarjugador(jugador);
+			conexion.insertarJugador(jugador);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

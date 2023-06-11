@@ -4,12 +4,7 @@ package presentation;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import domain.models.Arbitro;
-import domain.models.Categoria;
-import domain.models.Equipo;
-import domain.models.Jugador;
-import domain.models.Partido;
-import domain.models.Pista;
+import domain.models.*;
 import domain.useCase.*;
 
 
@@ -18,16 +13,26 @@ public class Main {
 	
 	public static void main(String[] args) throws SQLException {
 		
-		
 		AddJugadorUseCase addJugador = new AddJugadorUseCase();
-		
 		DeleteJugadorUseCase deleteJugador = new DeleteJugadorUseCase();
-		
 		SearchJugadorUseCase searchJugador = new SearchJugadorUseCase();
+		
+		AddEquipoUseCase addEquipo = new AddEquipoUseCase();
+		DeleteEquipoUseCase deleteEquipo = new DeleteEquipoUseCase();
+		SearchEquipoUseCase searchEquipo= new SearchEquipoUseCase();
 		
 		Equipo equipo1 = new Equipo(1, "Yepes", Categoria.Senior);
 		
 		Equipo equipo2 = new Equipo(2, "Dioce", Categoria.Senior);
+		
+		addEquipo.execute(equipo1);
+		addEquipo.execute(equipo2);
+		
+		System.out.println(searchEquipo.execute(1));
+		
+		deleteEquipo.execute(2);
+		
+		
 		
 		Jugador jugador = new Jugador();
 		jugador.setId(1);
@@ -40,7 +45,7 @@ public class Main {
 		
 		System.out.println(searchJugador.execute(1).toString());
 		
-	//	deleteJugador.execute(1);
+		deleteJugador.execute(1);
 		
 //		jugador.setFechaNacimiento(LocalDate.of(2000, 5, 5));
 //		

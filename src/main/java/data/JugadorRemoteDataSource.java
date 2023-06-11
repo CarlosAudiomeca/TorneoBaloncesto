@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import domain.models.Jugador;
+import domain.useCase.SearchEquipoUseCase;
 
 public class JugadorRemoteDataSource {
 	private Connection conexion;
@@ -45,26 +46,26 @@ public class JugadorRemoteDataSource {
 		return instance;
 	}
 	
-	public void insertarjugador(Jugador jugador) throws SQLException{
+	public void insertarJugador(Jugador jugador) throws SQLException{
 
 		 String consulta="INSERT INTO jugador (id, nombre, apellidos, fecha_nacimiento, equipo_id) VALUES(?,?,?,?,?)";
 
 		 try {
-		 PreparedStatement statement = conexion.prepareStatement(consulta);
-		 statement.setInt(1, jugador.getId());
-		 statement.setString(2, jugador.getNombre());
-		 statement.setString(3, jugador.getApellidos());
-		 DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		 String fecha = jugador.getFechaNacimiento().format(formateador);
-		 statement.setString(4, fecha); 
-		 statement.setInt(5,  jugador.getEquipo().getId());
-		 statement.executeUpdate();
-		 statement.close();
+			 PreparedStatement statement = conexion.prepareStatement(consulta);
+			 statement.setInt(1, jugador.getId());
+			 statement.setString(2, jugador.getNombre());
+			 statement.setString(3, jugador.getApellidos());
+			 DateTimeFormatter formateador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			 String fecha = jugador.getFechaNacimiento().format(formateador);
+			 statement.setString(4, fecha); 
+			 statement.setInt(5,  jugador.getEquipo().getId());
+			 statement.executeUpdate();
+			 statement.close();
 		 } catch (SQLException e) {
 
-		 // TODO Auto-generated catch block
+			 // TODO Auto-generated catch block
 
-		 e.printStackTrace();
+			 e.printStackTrace();
 
 		 }
 
@@ -95,7 +96,8 @@ public class JugadorRemoteDataSource {
 		 	jugador.setNombre(resultSet.getString("nombre"));
 		 	jugador.setApellidos(resultSet.getString("apellidos"));
 		 	jugador.setFechaNacimiento(LocalDate.parse(resultSet.getString("fecha_nacimiento"),formater));
-		 	//jugador.setEquipo(searchEquipoUseCase(resultSet.getInt("equipo_id")));
+		 	SearchEquipoUseCase buscarJugador= new SearchEquipoUseCase();
+		 	jugador.setEquipo(buscarJugador.execute(resultSet.getInt("equipo_id")));
 		 	statement.close();
 		 	resultSet.close();
 		 } catch (SQLException e) {
