@@ -61,7 +61,7 @@ public class Pista {
 	public String nombrePista() {
 		String nombreFinal = "";
 
-		if (ubicacion.equals(Ubicacion.Derecha)) {
+		if (ubicacion==Ubicacion.Derecha) {
 			nombreFinal = id + "D";
 		} else {
 			nombreFinal = id + "I";
