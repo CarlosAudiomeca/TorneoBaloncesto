@@ -96,8 +96,8 @@ public class JugadorRemoteDataSource {
 		 	jugador.setNombre(resultSet.getString("nombre"));
 		 	jugador.setApellidos(resultSet.getString("apellidos"));
 		 	jugador.setFechaNacimiento(LocalDate.parse(resultSet.getString("fecha_nacimiento"),formater));
-		 	SearchEquipoUseCase buscarJugador= new SearchEquipoUseCase();
-		 	jugador.setEquipo(buscarJugador.execute(resultSet.getInt("equipo_id")));
+		 	SearchEquipoUseCase searchEquipoUseCase= new SearchEquipoUseCase();
+		 	jugador.setEquipo(searchEquipoUseCase.execute(resultSet.getInt("equipo_id")));
 		 	statement.close();
 		 	resultSet.close();
 		 } catch (SQLException e) {

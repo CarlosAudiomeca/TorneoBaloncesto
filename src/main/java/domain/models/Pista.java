@@ -22,8 +22,9 @@ public class Pista {
 	public Pista(Ubicacion ubicacion) {
 		contador++;
 		this.id = contador;
-		this.nombre = nombrePista();
 		this.ubicacion=ubicacion;
+		this.nombre = nombrePista();
+
 	}
 
 	
@@ -56,19 +57,18 @@ public class Pista {
 	public String toString() {
 		return "Pista [id=" + id + ", nombre=" + nombre + "]";
 	}
-	
+
 	public String nombrePista() {
-		String nombreFinal="";
-		
-		if(ubicacion==Ubicacion.Derecha) {
-			nombreFinal=id+"d";
-		}else {
-			nombreFinal=id+"i";
+		String nombreFinal = "";
+
+		if (ubicacion==Ubicacion.Derecha) {
+			nombreFinal = id + "D";
+		} else {
+			nombreFinal = id + "I";
 		}
-		
-			
-		
+
 		return nombreFinal;
 	}
+
 
 }
