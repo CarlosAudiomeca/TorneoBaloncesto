@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import domain.models.Categoria;
 import domain.models.Equipo;
@@ -93,5 +95,23 @@ public class EquipoRemoteDataSource {
 		 } catch (SQLException e) {
 		 }
 		 return equipo;
+	}
+	
+	public List<Equipo> obtenerEquipos() throws SQLException{
+		List <Equipo> equipos= new ArrayList<>();
+		String consulta="select * from equipos;";
+		PreparedStatement statement = conexion.prepareStatement(consulta);
+		ResultSet resultSet = statement.executeQuery();
+		while (resultSet.next()) {
+			int id=resultSet.getInt("id");
+			String nombre=resultSet.getString("nombre");
+			Categoria categoria=Categoria.valueOf(resultSet.getString("categoria"));
+			
+			Equipo equipo = new Equipo(id, nombre, categoria);
+			equipos.add(equipo);
+		}
+		resultSet.close();
+		statement.close();
+		return equipos;
 	}
 }
