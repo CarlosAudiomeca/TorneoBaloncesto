@@ -25,7 +25,7 @@ public class EquipoRemoteDataSource {
 			e1.printStackTrace();
 		}
 		
-		conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+url,user,password);
+		conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/"+url,user,password);
 		
 	}
 	

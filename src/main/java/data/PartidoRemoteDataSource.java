@@ -1,11 +1,9 @@
 package data;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import domain.models.Partido;
+import domain.useCase.SearchArbitroUseCase;
 import domain.useCase.SearchEquipoUseCase;
 import domain.useCase.SearchPistaUseCase;
 
@@ -25,7 +23,7 @@ public class PartidoRemoteDataSource {
             e1.printStackTrace();
         }
 
-        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+url,user,password);
+        conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/"+url,user,password);
 
     }
 
@@ -51,14 +49,13 @@ public class PartidoRemoteDataSource {
         try {
             PreparedStatement statement = conexion.prepareStatement(consulta);
             statement.setInt(1, partido.getId());
-            SimpleDateFormat formato = new SimpleDateFormat("HH:mm");
 
 //            String tiempo = formato.format(partido.getHora());
 //            statement.setString(2, tiempo);
             statement.setTime(2, partido.getHora());
             statement.setInt(3, partido.getPista().getId());
             statement.setInt(4, partido.getEquipo1().getId());
-            statement.setInt(5, partido.getEquipo1().getId());
+            statement.setInt(5, partido.getEquipo2().getId());
             statement.setInt(6,  partido.getArbitro().getId());
             statement.setString(7, partido.getResultado());
             statement.executeUpdate();
@@ -85,7 +82,6 @@ public class PartidoRemoteDataSource {
     }
 
     public Partido searchPartido (int id) {
-        DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Partido partido = new Partido();
         String consulta="SELECT * FROM partido WHERE id="+id;
 
@@ -101,7 +97,8 @@ public class PartidoRemoteDataSource {
             SearchEquipoUseCase searchEquipoUseCase = new SearchEquipoUseCase();
             partido.setEquipo1(searchEquipoUseCase.execute(resultSet.getInt("equipo1_id")));
             partido.setEquipo2(searchEquipoUseCase.execute(resultSet.getInt("equipo2_id")));
-            //arbitro, esperando a Pablo
+            SearchArbitroUseCase searchArbitroUseCase = new SearchArbitroUseCase();
+            partido.setArbitro(searchArbitroUseCase.execute(resultSet.getInt("arbitro_id")));
             partido.setResultado(resultSet.getString("resultado"));
             statement.close();
             resultSet.close();

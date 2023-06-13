@@ -29,8 +29,16 @@ public class Partido {
 		this.hora = hora;
 		this.pista = pista;
 		this.equipo1 = equipo1;
-		this.equipo2 = equipo2;
-		this.arbitro = arbitro;
+		if (coincidirCategoriaEquipos(equipo1, equipo2)==true) {
+			this.equipo2=equipo2;
+		}else {
+			System.out.println("Los equipos no coinciden en categoria");
+		}
+		if (coincidirCategoriaArbitro(equipo1, arbitro)==true) {
+			this.arbitro=arbitro;
+		}else {
+			System.out.println("Este arbitro no puede arbitrar este partido");
+		}
 		this.resultado = resultado;
 	}
 	
@@ -72,7 +80,11 @@ public class Partido {
 	}
 
 	public void setEquipo2(Equipo equipo2) {
-		this.equipo2 = equipo2;
+		if (coincidirCategoriaEquipos(equipo1, equipo2)==true) {
+			this.equipo2=equipo2;
+		}else {
+			System.out.println("Los equipos no coinciden en categoria");
+		}
 	}
 
 	public Arbitro getArbitro() {
@@ -80,7 +92,11 @@ public class Partido {
 	}
 
 	public void setArbitro(Arbitro arbitro) {
-		this.arbitro = arbitro;
+		if (coincidirCategoriaArbitro(equipo1, arbitro)==true) {
+			this.arbitro=arbitro;
+		}else {
+			System.out.println("Este arbitro no puede arbitrar este partido");
+		}
 	}
 
 	public String getResultado() {
@@ -95,6 +111,24 @@ public class Partido {
 	public String toString() {
 		return "Partido [id=" + id + ", hora=" + hora + ", pista=" + pista + ", equipo1=" + equipo1 + ", equipo2="
 				+ equipo2 + ", arbitro=" + arbitro + ", resultado=" + resultado + "]";
+	}
+	
+	private boolean coincidirCategoriaEquipos(Equipo equipo, Equipo equipo2) {
+		Boolean result=false;
+		if (equipo.getCategoria()== equipo2.getCategoria()) {
+			result=true;
+		}
+		
+		return result;
+	}
+	
+	private boolean coincidirCategoriaArbitro(Equipo equipo, Arbitro arbitro) {
+		Boolean result=false;
+		if (equipo.getCategoria()==arbitro.getCategoria()) {
+			result=true;
+		}
+		
+		return result;
 	}
 	
 	
